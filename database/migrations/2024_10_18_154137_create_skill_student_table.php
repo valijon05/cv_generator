@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('skill_student', function (Blueprint $table) {
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('skill_id');
-
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
-
-            $table->primary(['student_id', 'skill_id']);
-
+            $table->id();
+            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
+            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
+
     }
 
     /**
