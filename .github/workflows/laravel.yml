@@ -52,7 +52,7 @@ jobs:
             git reset --hard HEAD
             git pull
             docker-compose -f docker-compose.production.yml up --build -d
-            docker exec laravel_app php artisan optimize
+            docker exec app php artisan optimize
 
 
 
