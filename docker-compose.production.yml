@@ -50,7 +50,7 @@ services:
     depends_on:
       - laravel_app  # Ensure PHP-FPM is started before Nginx
     networks:
-      - laravel_app-networkapp-network  # Connect to the custom network
+      - laravel_app-networkapp # Connect to the custom network
 
 volumes:
   postgres_data:
