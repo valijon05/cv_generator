@@ -1,5 +1,5 @@
 services:
-  app:
+  laravel_app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/var/www
     networks:
-      - app-network
+      - laravel_app-network
     depends_on:
       - postgres
 
@@ -23,7 +23,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - app-network
+      - laravel_app-network
     expose:
       - 5432
 
@@ -37,7 +37,7 @@ services:
     ports:
       - "8081:80"
     networks:
-      - app-network
+      - laravel_app-network
 
   web:
     container_name: web
@@ -48,14 +48,14 @@ services:
       - ./:/var/www  # Mount the Laravel application directory-
       - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Use our Nginx config
     depends_on:
-      - app  # Ensure PHP-FPM is started before Nginx
+      - laravel_app  # Ensure PHP-FPM is started before Nginx
     networks:
-      - app-network  # Connect to the custom network
+      - laravel_app-networkapp-network  # Connect to the custom network
 
 volumes:
   postgres_data:
 
 networks:
-  app-network:
+  laravel_app-network:
     driver: bridge
 
